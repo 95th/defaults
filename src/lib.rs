@@ -3,6 +3,7 @@ extern crate proc_macro;
 use proc_macro::TokenStream;
 use quote::{quote, quote_spanned};
 use syn::parse_macro_input;
+use syn::spanned::Spanned;
 
 macro_rules! err {
     ($meta: expr) => {
@@ -18,10 +19,9 @@ pub fn derive(input: TokenStream) -> TokenStream {
     let ast = parse_macro_input!(input as syn::DeriveInput);
     let name = &ast.ident;
 
-    let fields = if let syn::Data::Struct(syn::DataStruct { fields, .. }) = &ast.data {
-        fields
-    } else {
-        return err!(name, "Only implemented for structs").into();
+    let fields = match &ast.data {
+        syn::Data::Struct(s) => &s.fields,
+        _ => return err!(name, "`Defaults` cannot be derived for enums, only structs").into(),
     };
 
     match fields {
@@ -70,12 +70,11 @@ fn unit_impl(name: &proc_macro2::Ident) -> TokenStream {
 fn named_impl(name: &proc_macro2::Ident, fields: &syn::FieldsNamed) -> TokenStream {
     let fields = fields.named.iter().map(|f| {
         let name = &f.ident;
-        let span = name.as_ref().unwrap().span();
         if let Some(attr) = def_of(f) {
             let def_val = def_val_of(attr);
-            quote_spanned! {span => #name: #def_val }
+            quote_spanned! {f.span() => #name: #def_val }
         } else {
-            quote_spanned! {span => #name: Default::default() }
+            quote_spanned! {f.span() => #name: Default::default() }
         }
     });
 
@@ -92,7 +91,6 @@ fn named_impl(name: &proc_macro2::Ident, fields: &syn::FieldsNamed) -> TokenStre
 }
 
 fn unnamed_impl(name: &proc_macro2::Ident, fields: &syn::FieldsUnnamed) -> TokenStream {
-    use syn::spanned::Spanned;
     let fields = fields.unnamed.iter().map(|f| {
         if let Some(attr) = def_of(f) {
             let def_val = def_val_of(attr);
