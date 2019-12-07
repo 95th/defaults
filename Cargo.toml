@@ -1,9 +1,15 @@
 [package]
 name = "defaults"
+description = "A better `Default` derive macro"
 version = "0.1.0"
-authors = ["Singh, Gurwinder <Gurwinder.Singh@fisglobal.com>"]
+authors = ["Gurwinder Singh <vargwin@gmail.com>"]
 edition = "2018"
 autotests = false
+license-file = "LICENSE"
+homepage = "https://github.com/95th/defaults"
+repository = "https://github.com/95th/defaults"
+documentation = "https://docs.rs/defaults"
+readme = "README.md"
 
 [lib]
 proc-macro = true
