@@ -1,4 +1,5 @@
-error: `Defaults` cannot be derived for enums, only structs
+error: Explicit default is required for enums.
+help: Add `#[def = "..."]` to the enum definition
  --> $DIR/12-enums.rs:4:6
   |
 4 | enum Foo {

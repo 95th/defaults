@@ -1,0 +1,15 @@
+error[E0308]: mismatched types
+ --> $DIR/19-enums-tuple-variant-incomplete.rs:4:9
+  |
+4 | #[def = "A"]
+  |         ^^^
+  |         |
+  |         expected enum `Foo`, found fn item
+  |         expected due to this
+  |         help: use parentheses to instantiate this tuple variant: `"A"(_)`
+5 | enum Foo {
+6 |     A(usize),
+  |     -------- fn(usize) -> Foo {Foo::A} defined here
+  |
+  = note: expected enum `Foo`
+          found fn item `fn(usize) -> Foo {Foo::A}`

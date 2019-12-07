@@ -17,4 +17,9 @@ fn tests() {
     t.compile_fail("tests/12-enums.rs");
     t.compile_fail("tests/13-multiple-attrs.rs");
     t.pass("tests/14-custom-default-struct-named.rs");
+    t.pass("tests/15-enums-attr.rs");
+    t.pass("tests/16-enums-struct-variant.rs");
+    t.compile_fail("tests/17-enums-struct-variant-incomplete.rs");
+    t.pass("tests/18-enums-tuple-variant.rs");
+    t.compile_fail("tests/19-enums-tuple-variant-incomplete.rs");
 }
