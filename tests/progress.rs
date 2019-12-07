@@ -16,4 +16,5 @@ fn tests() {
     t.compile_fail("tests/11-invalid-expr.rs");
     t.compile_fail("tests/12-enums.rs");
     t.compile_fail("tests/13-multiple-attrs.rs");
+    t.pass("tests/14-custom-default-struct-named.rs");
 }
