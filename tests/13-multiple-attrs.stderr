@@ -1,0 +1,5 @@
+error: multiple definitions of "def" found
+ --> $DIR/13-multiple-attrs.rs:6:5
+  |
+6 |     #[def = "100"]
+  |     ^^^^^^^^^^^^^^

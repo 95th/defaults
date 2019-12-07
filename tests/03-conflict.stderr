@@ -1,0 +1,7 @@
+error[E0119]: conflicting implementations of trait `std::default::Default` for type `Foo`:
+ --> $DIR/03-conflict.rs:3:10
+  |
+3 | #[derive(Defaults, Default)]
+  |          ^^^^^^^^  ------- first implementation here
+  |          |
+  |          conflicting implementation for `Foo`

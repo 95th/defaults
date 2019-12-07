@@ -1,0 +1,5 @@
+error: Not a valid expression
+ --> $DIR/11-invalid-expr.rs:5:13
+  |
+5 |     #[def = "1/"]
+  |             ^^^^

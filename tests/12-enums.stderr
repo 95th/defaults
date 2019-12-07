@@ -1,0 +1,5 @@
+error: `Defaults` cannot be derived for enums, only structs
+ --> $DIR/12-enums.rs:4:6
+  |
+4 | enum Foo {
+  |      ^^^
