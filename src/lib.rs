@@ -58,10 +58,7 @@ fn try_derive_enum(
             Ok(quote_spanned! {
                 def_val.span() =>
                 impl std::default::Default for #name {
-                    fn default() -> Self {
-                        let val: Self = Self::#def_val;
-                        val
-                    }
+                    fn default() -> Self { #def_val }
                 }
             })
         }
@@ -104,9 +101,7 @@ fn def_val_of(attr: &syn::Attribute) -> syn::Result<syn::Expr> {
 fn struct_unit_impl(name: &proc_macro2::Ident) -> syn::Result<proc_macro2::TokenStream> {
     let val = quote! {
         impl std::default::Default for #name {
-            fn default() -> Self {
-                Self
-            }
+            fn default() -> Self { Self }
         }
     };
     Ok(val)

@@ -1,11 +1,10 @@
 use defaults::Defaults;
 
 #[derive(Defaults)]
-struct X {
-    #[def = "10"]
-    x: usize,
+#[def = "X::A"]
+enum X {
+    A,
+    B,
 }
 
-fn main() {
-    assert_eq!(10, X::default().x);
-}
+fn main() {}

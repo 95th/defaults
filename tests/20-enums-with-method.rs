@@ -1,10 +1,14 @@
 use defaults::Defaults;
 
 #[derive(Defaults)]
-#[def = "Foo::A(10)"]
+#[def = "foo_a(10)"]
 enum Foo {
     A(usize),
     B,
+}
+
+fn foo_a(a: usize) -> Foo {
+    Foo::A(a)
 }
 
 fn main() {

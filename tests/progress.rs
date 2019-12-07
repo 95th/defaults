@@ -22,4 +22,5 @@ fn tests() {
     t.compile_fail("tests/17-enums-struct-variant-incomplete.rs");
     t.pass("tests/18-enums-tuple-variant.rs");
     t.compile_fail("tests/19-enums-tuple-variant-incomplete.rs");
+    t.pass("tests/20-enums-with-method.rs");
 }
