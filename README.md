@@ -1,6 +1,9 @@
 # `#[derive(Defaults)]`
 A better `Default` derive macro.
 
+[![Crate](https://img.shields.io/crates/v/defaults.svg)](https://crates.io/crates/defaults)
+
+
 **Examples**:
 
 You can provide default value for a non-default field.
