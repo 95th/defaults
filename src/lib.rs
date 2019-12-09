@@ -21,7 +21,7 @@ pub fn derive(input: TokenStream) -> TokenStream {
 
     let tts = match &ast.data {
         syn::Data::Struct(s) => derive_struct(name, &s.fields),
-        syn::Data::Enum(_) => match try_derive_enum(name, &ast.attrs) {
+        syn::Data::Enum(_) => match derive_enum(name, &ast.attrs) {
             Ok(tts) => tts,
             Err(e) => e.to_compile_error(),
         },
@@ -48,7 +48,7 @@ fn derive_struct(name: &syn::Ident, fields: &syn::Fields) -> proc_macro2::TokenS
     }
 }
 
-fn try_derive_enum(
+fn derive_enum(
     name: &proc_macro2::Ident,
     attrs: &[syn::Attribute],
 ) -> syn::Result<proc_macro2::TokenStream> {
@@ -76,7 +76,7 @@ fn def_attr(attrs: &[syn::Attribute]) -> syn::Result<Option<&syn::Attribute>> {
             if out.is_none() {
                 out = Some(attr);
             } else {
-                err!(attr, r#"multiple definitions of `def` found"#)?;
+                return err!(attr, r#"multiple definitions of `def` found"#);
             }
         }
     }
@@ -86,7 +86,7 @@ fn def_attr(attrs: &[syn::Attribute]) -> syn::Result<Option<&syn::Attribute>> {
 fn def_val_of(attr: &syn::Attribute) -> syn::Result<syn::Expr> {
     let nv = match attr.parse_meta()? {
         syn::Meta::NameValue(nv) => nv,
-        meta => err!(meta)?,
+        meta => return err!(meta),
     };
 
     match &nv.lit {
