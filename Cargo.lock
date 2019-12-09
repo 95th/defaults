@@ -2,7 +2,7 @@
 # It is not intended for manual editing.
 [[package]]
 name = "defaults"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "proc-macro2 1.0.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "quote 1.0.2 (registry+https://github.com/rust-lang/crates.io-index)",
