@@ -1,7 +1,7 @@
 use defaults::Defaults;
 
 #[derive(Debug, Defaults)]
-#[def = "Self::B"]
+#[def = "B"]
 pub enum Classroom {
     A,
     B,

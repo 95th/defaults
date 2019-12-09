@@ -58,7 +58,7 @@ fn derive_enum(
             Ok(quote_spanned! {
                 def_val.span() =>
                 impl std::default::Default for #name {
-                    fn default() -> Self { #def_val }
+                    fn default() -> Self { Self::#def_val }
                 }
             })
         }

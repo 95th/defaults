@@ -35,7 +35,7 @@ You can even provide default value of enums:
 
 ```rust
 #[derive(Defaults)]
-#[def = "Self::A"]
+#[def = "A"]
 pub struct Classroom {
     A,
     B,
@@ -47,7 +47,7 @@ But what about variants with data?
 
 ```rust
 #[derive(Defaults)]
-#[def = "Self::A(100)"]
+#[def = "A(100)"]
 pub struct SomeEnum {
     A(usize),
     B { x: usize, y: usize },
