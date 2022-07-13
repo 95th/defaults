@@ -57,7 +57,7 @@ fn derive_enum(
             let def_val = def_val_of(attr)?;
             Ok(quote_spanned! {
                 def_val.span() =>
-                impl std::default::Default for #name {
+                impl core::default::Default for #name {
                     fn default() -> Self { Self::#def_val }
                 }
             })
@@ -100,7 +100,7 @@ fn def_val_of(attr: &syn::Attribute) -> syn::Result<syn::Expr> {
 
 fn struct_unit_impl(name: &proc_macro2::Ident) -> syn::Result<proc_macro2::TokenStream> {
     let val = quote! {
-        impl std::default::Default for #name {
+        impl core::default::Default for #name {
             fn default() -> Self { Self }
         }
     };
@@ -125,7 +125,7 @@ fn struct_named_impl(
     }
 
     let out = quote! {
-        impl std::default::Default for #name {
+        impl core::default::Default for #name {
             fn default() -> Self {
                 Self {
                     #(#mapped,)*
@@ -153,7 +153,7 @@ fn struct_unnamed_impl(
     }
 
     let out = quote! {
-        impl std::default::Default for #name {
+        impl core::default::Default for #name {
             fn default() -> Self {
                 Self (
                     #(#mapped,)*
