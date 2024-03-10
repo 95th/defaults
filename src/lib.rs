@@ -72,7 +72,7 @@ fn derive_enum(
 fn def_attr(attrs: &[syn::Attribute]) -> syn::Result<Option<&syn::Attribute>> {
     let mut out = None;
     for attr in attrs {
-        if attr.path.segments.len() == 1 && attr.path.segments[0].ident == "def" {
+        if attr.path().segments.len() == 1 && attr.path().segments[0].ident == "def" {
             if out.is_none() {
                 out = Some(attr);
             } else {
@@ -84,13 +84,16 @@ fn def_attr(attrs: &[syn::Attribute]) -> syn::Result<Option<&syn::Attribute>> {
 }
 
 fn def_val_of(attr: &syn::Attribute) -> syn::Result<syn::Expr> {
-    let nv = match attr.parse_meta()? {
+    let nv = match &attr.meta {
         syn::Meta::NameValue(nv) => nv,
         meta => return err!(meta),
     };
 
-    match &nv.lit {
-        syn::Lit::Str(s) => match s.parse::<syn::Expr>() {
+    match &nv.value {
+        syn::Expr::Lit(syn::ExprLit {
+            lit: syn::Lit::Str(s),
+            ..
+        }) => match s.parse::<syn::Expr>() {
             Ok(expr) => Ok(expr),
             _ => err!(s, "Not a valid expression"),
         },
